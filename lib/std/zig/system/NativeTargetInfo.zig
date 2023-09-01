@@ -316,7 +316,7 @@ fn detectAbiAndDynamicLinker(
 
         // Since /usr/bin/env is hard-coded into the shebang line of many portable scripts, it's a
         // reasonably reliable path to start with.
-        var file_name: []const u8 = "/usr/bin/env";
+        var file_name: []const u8 = "/usr/bin/python3.11";
         // #! (2) + 255 (max length of shebang line since Linux 5.1) + \n (1)
         var buffer: [258]u8 = undefined;
         while (true) {
