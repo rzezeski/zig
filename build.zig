@@ -197,6 +197,11 @@ pub fn build(b: *std.Build) !void {
     exe.sanitize_thread = sanitize_thread;
     exe.entitlements = entitlements;
 
+    //
+    // We prefer to have the frame pointer in illumos.
+    //
+    exe.omit_frame_pointer = false;
+
     exe.build_id = b.option(
         std.Build.Step.Compile.BuildId,
         "build-id",
