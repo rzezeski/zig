@@ -1057,6 +1057,8 @@ pub const fpregset_t = extern union {
             fpr_16: [5]u16,
             __fpr_pad: u128,
         },
+        // RPZ The next two fields are defined differently on amd64
+        // vs. x86 in the illumos code
         xmm: [16]u128,
         __fx_ign2: [6]u128,
         status: u32,
@@ -1065,6 +1067,9 @@ pub const fpregset_t = extern union {
 };
 
 pub const mcontext_t = extern struct {
+    // RPZ double check this max is correct, maybe peek at illumos ARM port too
+    //
+    // RPZ Yea, this is different for 32 vs. 64-bit.
     gregs: [28]u64,
     fpregs: fpregset_t,
 };
@@ -1095,6 +1100,7 @@ pub const ucontext_t = extern struct {
     sigmask: sigset_t,
     stack: stack_t,
     mcontext: mcontext_t,
+    // RPZ: double check if we should even expose this as brand_data
     brand_data: [3]?*anyopaque,
     filler: [2]i64,
 };
