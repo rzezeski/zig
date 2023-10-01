@@ -123,7 +123,7 @@ pub fn setName(self: Thread, name: []const u8) SetNameError!void {
                 else => |e| return os.unexpectedErrno(e),
             }
         },
-        .netbsd, .solaris => if (use_pthreads) {
+        .netbsd, .solaris, .illumos => if (use_pthreads) {
             const err = std.c.pthread_setname_np(self.getHandle(), name_with_terminator.ptr, null);
             switch (err) {
                 .SUCCESS => return,
